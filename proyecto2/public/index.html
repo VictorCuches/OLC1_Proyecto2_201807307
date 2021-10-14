@@ -27,6 +27,41 @@
     <title>React App</title>
   </head>
   <body>
+      <div id="opciones">
+        <ul class="spcO">
+          <li><a href="">Archivo</a>
+            <ul>
+              <li><a href="#"> <input type="file" id="file" class="butFile" > Abrir</a></li>
+              <li><a href="#">Crear</a></li>
+              <li><a href="#">Guardar</a></li>
+            </ul>
+          </li>
+          
+          <li><a href="#">Pestaña</a>
+            <ul>
+              <li><a href="#">Crear</a></li>
+              <li><a href="#">Eliminar</a></li>
+               
+            </ul>
+          </li>
+
+          <li><a href="#" >Ejecutar</a>
+            <ul>
+              <li><a href="#" id="compile">Compilar</a> </li>
+            </ul>
+          </li>
+          <li><a href="#">Reportes</a>
+            <ul>
+              <li><a href="#">Errores</a></li>
+              <li><a href="#">AST</a></li>
+              <li><a href="#">Tabla de simbolos</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <br><br><br><br>
+      <textarea name="textarea" rows="10" cols="50" id="editor"> </textarea>
+     
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
