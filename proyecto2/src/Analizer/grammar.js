@@ -72,45 +72,24 @@
   }
 */
 var grammar = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[5,7],$V2=[1,10],$V3=[1,11],$V4=[1,15],$V5=[1,16],$V6=[9,10,11,12,13],$V7=[9,10,11];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,6],$V2=[1,8],$V3=[1,9],$V4=[1,10],$V5=[1,11],$V6=[1,12],$V7=[5,7,8,10,14,16,19,20];
 var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"inicio":3,"instrucciones":4,"EOF":5,"instruccion":6,"TK_CALCULAR":7,"EXPRESION":8,"TK_PTCOMA":9,"TK_SUMA":10,"TK_RESTA":11,"TK_MULTIPLICACION":12,"TK_DIVISION":13,"VALOR":14,"DECIMAL":15,"ENTERO":16,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",7:"TK_CALCULAR",9:"TK_PTCOMA",10:"TK_SUMA",11:"TK_RESTA",12:"TK_MULTIPLICACION",13:"TK_DIVISION",15:"DECIMAL",16:"ENTERO"},
-productions_: [0,[3,2],[4,2],[4,1],[4,1],[6,3],[8,3],[8,3],[8,3],[8,3],[8,1],[14,1],[14,1]],
+symbols_: {"error":2,"inicio":3,"instrucciones":4,"EOF":5,"instruccion":6,"COMENTLINEA":7,"COMENTMULTI":8,"asignacion":9,"INT":10,"IDENTIFI":11,"IGUAL":12,"ENTERO":13,"DOUBLE":14,"DECIMAL":15,"BOOLEAN":16,"TRUE":17,"FALSE":18,"CHAR":19,"STRING":20,"CADENA":21,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",7:"COMENTLINEA",8:"COMENTMULTI",10:"INT",11:"IDENTIFI",12:"IGUAL",13:"ENTERO",14:"DOUBLE",15:"DECIMAL",16:"BOOLEAN",17:"TRUE",18:"FALSE",19:"CHAR",20:"STRING",21:"CADENA"},
+productions_: [0,[3,2],[4,2],[4,1],[4,1],[6,1],[6,1],[6,1],[9,4],[9,4],[9,4],[9,4],[9,3],[9,4]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
 var $0 = $$.length - 1;
 switch (yystate) {
 case 4:
-console.log('Error Sintáctico con !!', yytext); 
-break;
-case 5:
- console.log('El valor calculado es: ',$$[$0-1]); 
-break;
-case 6:
- this.$ = $$[$0-2]   +  $$[$0]  ; 
-break;
-case 7:
- this.$ = $$[$0-2]   -  $$[$0]  ; 
-break;
-case 8:
- this.$ = $$[$0-2]   *  $$[$0]  ; 
-break;
-case 9:
- this.$ = $$[$0-2]   /  $$[$0]  ; 
-break;
-case 10:
- this.$ = Number($$[$0]); 
-break;
-case 11: case 12:
- this.$ = $$[$0]; 
+console.log('Error Sintáctico con ', yytext); 
 break;
 }
 },
-table: [{2:[1,4],3:1,4:2,6:3,7:$V0},{1:[3]},{5:[1,6],6:7,7:$V0},o($V1,[2,3]),o($V1,[2,4]),{8:8,14:9,15:$V2,16:$V3},{1:[2,1]},o($V1,[2,2]),{9:[1,12],10:[1,13],11:[1,14],12:$V4,13:$V5},o($V6,[2,10]),o($V6,[2,11]),o($V6,[2,12]),o($V1,[2,5]),{8:17,14:9,15:$V2,16:$V3},{8:18,14:9,15:$V2,16:$V3},{8:19,14:9,15:$V2,16:$V3},{8:20,14:9,15:$V2,16:$V3},o($V7,[2,6],{12:$V4,13:$V5}),o($V7,[2,7],{12:$V4,13:$V5}),o($V6,[2,8]),o($V6,[2,9])],
-defaultActions: {6:[2,1]},
+table: [{2:[1,4],3:1,4:2,6:3,7:$V0,8:$V1,9:7,10:$V2,14:$V3,16:$V4,19:$V5,20:$V6},{1:[3]},{5:[1,13],6:14,7:$V0,8:$V1,9:7,10:$V2,14:$V3,16:$V4,19:$V5,20:$V6},o($V7,[2,3]),o($V7,[2,4]),o($V7,[2,5]),o($V7,[2,6]),o($V7,[2,7]),{11:[1,15]},{11:[1,16]},{11:[1,17]},{11:[1,18]},{11:[1,19]},{1:[2,1]},o($V7,[2,2]),{12:[1,20]},{12:[1,21]},{12:[1,22]},{12:[1,23]},{12:[1,24]},{13:[1,25]},{15:[1,26]},{17:[1,27],18:[1,28]},o($V7,[2,12]),{21:[1,29]},o($V7,[2,8]),o($V7,[2,9]),o($V7,[2,10]),o($V7,[2,11]),o($V7,[2,13])],
+defaultActions: {13:[2,1]},
 parseError: function parseError (str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -686,32 +665,44 @@ options: {"case-insensitive":true},
 performAction: function anonymous(yy,yy_,$avoiding_name_collisions,YY_START) {
 var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
-case 0:return 7; 
+case 0:return 10;
 break;
-case 1:return 10;
+case 1:return 14;
 break;
-case 2:return 11;
+case 2:return 16;
 break;
-case 3:return 12;
+case 3:return 19;
 break;
-case 4:return 13;
+case 4:return 20;
 break;
-case 5:return 9;
+case 5:return "TRUE";
 break;
-case 6:return 15;
+case 6:return "FALSE";
 break;
-case 7:return 16;
+case 7:return "IGUAL";
 break;
-case 8:
+case 8:return 15;
 break;
-case 9:return 5;
+case 9:return 13;
 break;
-case 10: console.log("error léxico: ", yy_.yytext, 'en línea ', yy_.yylloc.first_line, 'en columna: ', yy_.yylloc.first_column); 
+case 10:return 11;
+break;
+case 11:return 21;
+break;
+case 12:return 7;
+break;
+case 13:return 8;
+break;
+case 14:
+break;
+case 15:return 5;
+break;
+case 16: console.log("error léxico: ", yy_.yytext, 'en línea ', yy_.yylloc.first_line, 'en columna: ', yy_.yylloc.first_column); 
 break;
 }
 },
-rules: [/^(?:calcular\b)/i,/^(?:\+)/i,/^(?:-)/i,/^(?:\*)/i,/^(?:\/)/i,/^(?:;)/i,/^(?:[0-9]+(\.[0-9]+)?\b)/i,/^(?:[0-9]+\b)/i,/^(?:[\r\t\n\s]+)/i,/^(?:$)/i,/^(?:.)/i],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10],"inclusive":true}}
+rules: [/^(?:int\b)/i,/^(?:double\b)/i,/^(?:boolean\b)/i,/^(?:char\b)/i,/^(?:string\b)/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:=)/i,/^(?:[0-9]+(\.[  |0-9]+)?)/i,/^(?:[0-9]+)/i,/^(?:[A-Za-z_]+[_0-9A-Za-z]*)/i,/^(?:"[^\"]*")/i,/^(?:(\/\/.*))/i,/^(?:\/\*\/*([^*/]|[^*]\/|\*[^/])*\**\*\/)/i,/^(?:[\r\t\n\s]+)/i,/^(?:$)/i,/^(?:.)/i],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"inclusive":true}}
 });
 return lexer;
 })();

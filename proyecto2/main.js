@@ -1,3 +1,7 @@
 const parser = require('./src/Analizer/grammar')
 
-console.log(parser.parse("calcular 1+1*8;"))
+
+
+var cont = "string name = \"asdf\" char UNO = \n double abc = 12.4  //into /*asfsf*/";
+
+console.log(parser.parse(cont))

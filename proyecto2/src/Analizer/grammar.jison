@@ -5,19 +5,28 @@
 %% 
 //definir tokens 
 // ER      retrun 'NOMBRE_TOKEN'
+ 
+ 
+"int"                   return 'INT';
+"double"                return 'DOUBLE';
+"boolean"               return 'BOOLEAN';
+"char"                  return 'CHAR';
+"string"                return 'STRING';
 
-"calcular"    return 'TK_CALCULAR'; 
+"true"                  return "TRUE";
+"false"                 return "FALSE";
 
-"+"         return 'TK_SUMA';
-"-"         return 'TK_RESTA';
-"*"         return 'TK_MULTIPLICACION';
-"/"         return 'TK_DIVISION';
+"="                     return "IGUAL";
 
-";"         return 'TK_PTCOMA';
 
-[0-9]+("."[0-9]+)?\b    return 'DECIMAL';
-[0-9]+\b                return 'ENTERO';
+[0-9]+("."[  |0-9]+)?                       return 'DECIMAL';
+[0-9]+                                      return 'ENTERO';
+[A-Za-z_]+[_0-9A-Za-z]*                     return 'IDENTIFI';
+"\""[^\"]*"\""                              return 'CADENA';
 
+
+(\/\/.*)      return 'COMENTLINEA';
+"/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"    return 'COMENTMULTI';
 
 [\r\t\n\s]+                 {}
 
@@ -42,22 +51,18 @@ inicio : instrucciones EOF;
 
 instrucciones : instrucciones instruccion 
 | instruccion
-| error {console.log('Error Sintáctico con !!', yytext); }; 
+| error {console.log('Error Sintáctico con ', yytext); }; 
 
-instruccion : TK_CALCULAR EXPRESION TK_PTCOMA { console.log('El valor calculado es: ',$2); }; 
+instruccion : COMENTLINEA
+| COMENTMULTI
+| asignacion 
+;
 
-EXPRESION : EXPRESION TK_SUMA EXPRESION { $$ = $1   +  $3  ; }
-|EXPRESION TK_RESTA EXPRESION { $$ = $1   -  $3  ; }
-|EXPRESION TK_MULTIPLICACION EXPRESION { $$ = $1   *  $3  ; }
-|EXPRESION TK_DIVISION EXPRESION { $$ = $1   /  $3  ; }
-| VALOR { $$ = Number($1); }; 
-
-VALOR : DECIMAL { $$ = $1; }
-| ENTERO { $$ = $1; };
-
-
-/*
-EXPRESION TK_SUMA EXPRESION 
-1           2       3
-*/
-
+asignacion: INT IDENTIFI IGUAL ENTERO 
+| DOUBLE IDENTIFI IGUAL DECIMAL
+| BOOLEAN IDENTIFI IGUAL TRUE
+| BOOLEAN IDENTIFI IGUAL FALSE
+| CHAR IDENTIFI IGUAL
+| STRING IDENTIFI IGUAL CADENA
+;
+ 
