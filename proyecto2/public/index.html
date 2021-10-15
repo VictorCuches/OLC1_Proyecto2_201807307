@@ -10,6 +10,7 @@
       content="Web site created using create-react-app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -24,7 +25,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>SysCompiler</title>
   </head>
   <body>
       <div id="opciones">
@@ -60,8 +61,20 @@
         </ul>
       </div>
       <br><br><br><br>
+      <br></br>
       <textarea name="textarea" rows="10" cols="50" id="editor"> </textarea>
      
+    <!-- <div id="editor">function foo(items) {
+        var x = "All this is syntax highlighted";
+        return x;
+    }</div>
+        
+    <script src="../node_modules/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/javascript");
+    </script> -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

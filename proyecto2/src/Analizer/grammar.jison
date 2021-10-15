@@ -1,68 +1,96 @@
-///configuraciones
+ 
 %lex
 %options case-insensitive
-
+ 
 %% 
-//definir tokens 
-// ER      retrun 'NOMBRE_TOKEN'
  
+[0-9]+                      return 'ENTERO'
+[0-9]+("."[  |0-9]+)?       return 'DECIMAL'
+(\"[^"]*\")                 return 'CADENA'
+
  
-"int"                   return 'INT';
-"double"                return 'DOUBLE';
-"boolean"               return 'BOOLEAN';
-"char"                  return 'CHAR';
-"string"                return 'STRING';
+"int"                   return 'INT'
+"double"                return 'DOUBLE'
+"boolean"               return 'BOOLEAN'
+"char"                  return 'CHAR'
+"string"                return 'STRING'
 
-"true"                  return "TRUE";
-"false"                 return "FALSE";
+"true"                  return 'TRUE'
+"false"                 return 'FALSE'
 
-"="                     return "IGUAL";
+"="                     return 'IGUAL'
+";"                     return 'PTCOMA'
+"if"                    return 'IF'
+"else"                  return 'ELSE'
+
+"("                     return 'PARAB'
+")"                     return 'PARCE'
+"{"                     return 'LLAB'
+"}"                     return 'LLACE'
+">"                     return '>'
+"<"                     return '<'
+
+ 
+[A-Za-z_]+[_0-9A-Za-z]*                     return 'IDENTIFI'
+ 
 
 
-[0-9]+("."[  |0-9]+)?                       return 'DECIMAL';
-[0-9]+                                      return 'ENTERO';
-[A-Za-z_]+[_0-9A-Za-z]*                     return 'IDENTIFI';
-"\""[^\"]*"\""                              return 'CADENA';
-
-
-(\/\/.*)      return 'COMENTLINEA';
-"/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"    return 'COMENTMULTI';
+(\/\/.*)                                    return 'COMENTLINEA'
+"/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"    return 'COMENTMULTI'
 
 [\r\t\n\s]+                 {}
 
-<<EOF>>                 return 'EOF';
+<<EOF>>                 return 'EOF'
 
-.                           { console.log("error léxico: ", yytext, 'en línea ', yylloc.first_line, 'en columna: ', yylloc.first_column); }
+.      { console.log("error léxico: ", yytext, 'en línea ', yylloc.first_line, 'en columna: ', yylloc.first_column); }
 
 /lex
 
 
-%left 'TK_SUMA' 'TK_RESTA'
-%left 'TK_MULTIPLICACION' 'TK_DIVISION'
 
 
 %start inicio
 
 %% 
-// Producciones
+ 
 
 
 inicio : instrucciones EOF;
 
 instrucciones : instrucciones instruccion 
 | instruccion
-| error {console.log('Error Sintáctico con ', yytext); }; 
+;
 
 instruccion : COMENTLINEA
 | COMENTMULTI
 | asignacion 
+| sentencia
+
 ;
 
-asignacion: INT IDENTIFI IGUAL ENTERO 
-| DOUBLE IDENTIFI IGUAL DECIMAL
-| BOOLEAN IDENTIFI IGUAL TRUE
-| BOOLEAN IDENTIFI IGUAL FALSE
-| CHAR IDENTIFI IGUAL
-| STRING IDENTIFI IGUAL CADENA
+asignacion: INT IDENTIFI IGUAL ENTERO PTCOMA
+| DOUBLE IDENTIFI IGUAL DECIMAL PTCOMA
+| BOOLEAN IDENTIFI IGUAL TRUE PTCOMA
+| BOOLEAN IDENTIFI IGUAL FALSE PTCOMA 
+| CHAR IDENTIFI IGUAL PTCOMA
+| STRING IDENTIFI IGUAL CADENA PTCOMA
 ;
+
+sentencia: IF PARAB expresion PARCE statement elsemore
+;
+
+expresion: IDENTIFI
+| ENTERO
+;
+
+statement: LLAB instrucciones LLACE
+| LLAB LLACE
+;
+
+elsemore : ELSE statement
+| ELSE sentencia
+|
+;
+
+
  

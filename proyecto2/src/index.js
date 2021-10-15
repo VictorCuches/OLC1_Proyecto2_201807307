@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 const parser = require('./Analizer/grammar')
   //"jison": "jison .src/Analizer/Grammar.jison && mv Grammar.js ./src/Analizer/"
+ 
+
 
 
 // prueba usando react
@@ -32,7 +34,6 @@ function probando() {
 
 // Lectura del archivo
 function readFile(evento){  
-    
   let archivo = evento.target.files[0];
   if (archivo){
       let reader = new FileReader();
